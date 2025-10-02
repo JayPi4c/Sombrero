@@ -27,37 +27,14 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
 
-      - name: Download JavaFX SDK
-        run: |
-          wget https://download2.gluonhq.com/openjfx/${{ env.JAVAFX_VERSION }}/openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip
-          unzip openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip -d ${{ github.workspace }}/javafx-sdk
-
-      - name: Install Linux GUI dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgtk-3-0 libgl1
-
       - name: Build with Maven
-        run: mvn clean package
+        run: ./mvnw clean package
 
-      - name: Run jlink
-        run: |
-          jlink \
-            --module-path "${JAVA_HOME}/jmods:${{ github.workspace }}/javafx-sdk/javafx-sdk-${{ env.JAVAFX_VERSION }}/lib" \
-            --add-modules java.base,java.desktop,java.logging,javafx.controls,javafx.graphics,javafx.fxml \
-            --output ${{ github.workspace }}/runtime
+      - name: Package it
+        run: ./mvnw jpackage:jpackage
 
-      - name: Package with jpackage
-        run: |
-          jpackage \
-            --type app-image \
-            --input target \
-            --name ${{ env.APP_NAME }} \
-            --main-class ${{ env.MAIN_CLASS }} \
-            --runtime-image ${{ github.workspace }}/runtime \
-            --dest ${{ github.workspace }}/dist || true
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux-app-image
-          path: dist/
+          name: linux-app
+          path: target/jpackage-image

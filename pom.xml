@@ -57,6 +57,10 @@
                     <execution>
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jlink</goal>
+                        </goals>
                         <configuration>
                             <mainClass>com.jaypi4c.mexicanhat/com.jaypi4c.mexicanhat.MexicanHatApplication</mainClass>
                             <launcher>app</launcher>
@@ -68,6 +72,22 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.7.1</version>
+                <configuration>
+                    <type>APP_IMAGE</type>
+                    <vendor>JayPi4c</vendor>
+                    <name>mexican-hat</name>
+                    <destination>target/jpackage-image</destination>
+                    <module>com.jaypi4c.mexicanhat/com.jaypi4c.mexicanhat.MexicanHatApplication</module>
+                    <runtimeImage>target/app</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                </configuration>
             </plugin>
         </plugins>
     </build>
