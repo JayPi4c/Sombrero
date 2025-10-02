@@ -14,8 +14,8 @@ jobs:
       JAVA_VERSION: '25'
       JAVAFX_VERSION: '25'
       APP_NAME: 'MexicanHat'
-      MAIN_JAR: 'mexicanhat-1.0-SNAPSHOT.jar' # Adjust to your jar name
-      MAIN_CLASS: 'com.jaypi4c.mexicanhat.Main' # Adjust to your main class
+      MAIN_JAR: 'mexicanhat-1.0-SNAPSHOT.jar'
+      MAIN_CLASS: 'com.jaypi4c.mexicanhat.MexicanHatApplication'
 
     steps:
       - name: Checkout code
