@@ -1,0 +1,59 @@
+name: Build Linux Executable
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+
+    env:
+      JAVA_VERSION: '25'
+      JAVAFX_VERSION: '25'
+      APP_NAME: 'MexicanHat'
+      MAIN_JAR: 'mexicanhat-1.0-SNAPSHOT.jar' # Adjust to your jar name
+      MAIN_CLASS: 'com.jaypi4c.mexicanhat.Main' # Adjust to your main class
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Eclipse Temurin
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Download JavaFX SDK
+        run: |
+          wget https://download2.gluonhq.com/openjfx/${{ env.JAVAFX_VERSION }}/openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip
+          unzip openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip -d ${{ github.workspace }}/javafx-sdk
+
+      - name: Build with Maven
+        run: mvn clean package
+
+      - name: Run jlink
+        run: |
+          jlink \
+            --module-path "${JAVA_HOME}/jmods:${{ github.workspace }}/javafx-sdk/javafx-sdk-${{ env.JAVAFX_VERSION }}/lib" \
+            --add-modules java.base,java.desktop,java.logging,javafx.controls,javafx.graphics,javafx.fxml \
+            --output ${{ github.workspace }}/runtime
+
+      - name: Package with jpackage
+        run: |
+          jpackage \
+            --type app-image \
+            --input target \
+            --main-jar ${{ env.MAIN_JAR }} \
+            --name ${{ env.APP_NAME }} \
+            --main-class ${{ env.MAIN_CLASS }} \
+            --runtime-image ${{ github.workspace }}/runtime \
+            --dest ${{ github.workspace }}/dist || true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-app-image
+          path: dist/
