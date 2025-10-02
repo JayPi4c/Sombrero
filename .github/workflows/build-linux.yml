@@ -32,6 +32,11 @@ jobs:
           wget https://download2.gluonhq.com/openjfx/${{ env.JAVAFX_VERSION }}/openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip
           unzip openjfx-${{ env.JAVAFX_VERSION }}_linux-x64_bin-sdk.zip -d ${{ github.workspace }}/javafx-sdk
 
+      - name: Install Linux GUI dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-0 libgl1
+      
       - name: Build with Maven
         run: mvn clean package
 
