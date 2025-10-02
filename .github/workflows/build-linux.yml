@@ -33,6 +33,12 @@ jobs:
       - name: Package it
         run: ./mvnw jpackage:jpackage
 
+      - name: Build deb
+        run: |
+          mkdir -p target/deb
+          cp -r debian target/deb
+          dpkg-buildpackage -us -uc
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
