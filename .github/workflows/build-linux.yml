@@ -36,7 +36,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-0 libgl1
-      
+
       - name: Build with Maven
         run: mvn clean package
 
@@ -52,7 +52,6 @@ jobs:
           jpackage \
             --type app-image \
             --input target \
-            --main-jar ${{ env.MAIN_JAR }} \
             --name ${{ env.APP_NAME }} \
             --main-class ${{ env.MAIN_CLASS }} \
             --runtime-image ${{ github.workspace }}/runtime \
