@@ -1,9 +1,8 @@
-module com.jaypi4c.mexicanhat {
+module com.jaypi4c.sombrero {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
 
-
-    opens com.jaypi4c.mexicanhat to javafx.fxml;
-    exports com.jaypi4c.mexicanhat;
+    opens com.jaypi4c.sombrero to javafx.fxml;
+    exports com.jaypi4c.sombrero;
 }

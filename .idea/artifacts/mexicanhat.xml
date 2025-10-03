@@ -14,7 +14,7 @@
     </properties>
     <root id="root">
       <element id="archive" name="mexicanhat.jar">
-        <element id="module-output" name="mexicanhat" />
+        <element id="module-output" name="sombrero" />
       </element>
     </root>
   </artifact>

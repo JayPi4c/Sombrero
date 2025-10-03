@@ -1,4 +1,4 @@
-package com.jaypi4c.mexicanhat;
+package com.jaypi4c.sombrero;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MexicanHatApplication extends Application {
+public class SombreroApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MexicanHatApplication.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SombreroApp.class.getResource("view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 400);
-        stage.setTitle("Mexican Hat");
+        stage.setTitle("Sombrero");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();

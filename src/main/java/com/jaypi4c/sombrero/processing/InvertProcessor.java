@@ -1,4 +1,4 @@
-package com.jaypi4c.mexicanhat.processing;
+package com.jaypi4c.sombrero.processing;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;

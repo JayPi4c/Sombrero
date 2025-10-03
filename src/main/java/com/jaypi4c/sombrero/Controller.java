@@ -1,8 +1,8 @@
-package com.jaypi4c.mexicanhat;
+package com.jaypi4c.sombrero;
 
 
-import com.jaypi4c.mexicanhat.processing.EdgeDetectionProcessor;
-import com.jaypi4c.mexicanhat.processing.Processor;
+import com.jaypi4c.sombrero.processing.EdgeDetectionProcessor;
+import com.jaypi4c.sombrero.processing.Processor;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

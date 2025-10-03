@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jaypi4c</groupId>
-    <artifactId>mexicanhat</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>Mexican Hat</name>
+    <artifactId>sombrero</artifactId>
+    <version>0.0.1</version>
+    <name>Sombrero</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -55,20 +55,23 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <phase>package</phase>
                         <goals>
                             <goal>jlink</goal>
                         </goals>
                         <configuration>
-                            <mainClass>com.jaypi4c.mexicanhat/com.jaypi4c.mexicanhat.MexicanHatApplication</mainClass>
+                            <mainClass>com.jaypi4c.sombrero/com.jaypi4c.sombrero.SombreroApp</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <options>
+                                <option>-Dfile.encoding=UTF-8</option>
+                                <option>--enable-native-access=javafx.graphics</option>
+                            </options>
                         </configuration>
                     </execution>
                 </executions>
@@ -80,9 +83,9 @@
                 <configuration>
                     <type>APP_IMAGE</type>
                     <vendor>JayPi4c</vendor>
-                    <name>mexican-hat</name>
+                    <name>sombrero</name>
                     <destination>target/jpackage-image</destination>
-                    <module>com.jaypi4c.mexicanhat/com.jaypi4c.mexicanhat.MexicanHatApplication</module>
+                    <module>com.jaypi4c.sombrero/com.jaypi4c.sombrero.SombreroApp</module>
                     <runtimeImage>target/app</runtimeImage>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>

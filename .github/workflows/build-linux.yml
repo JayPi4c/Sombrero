@@ -12,10 +12,6 @@ jobs:
 
     env:
       JAVA_VERSION: '25'
-      JAVAFX_VERSION: '25'
-      APP_NAME: 'MexicanHat'
-      MAIN_JAR: 'mexicanhat-1.0-SNAPSHOT.jar'
-      MAIN_CLASS: 'com.jaypi4c.mexicanhat.MexicanHatApplication'
 
     steps:
       - name: Checkout code

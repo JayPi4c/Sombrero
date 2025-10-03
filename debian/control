@@ -1,12 +1,12 @@
-Source: mexican-hat
+Source: sombrero
 Section: misc
 Maintainer: JayPi4c <jaypi4c@gmail.com>
 Priority: optional
 Build-Depends: debhelper-compat (= 13), gzip
 Standards-Version: 4.7.2
-Homepage: https://github.com/JayPi4c/mexican-hat
+Homepage: https://github.com/JayPi4c/sombrero
 
-Package: mexican-hat
+Package: sombrero
 Architecture: amd64
 Description: Sombrero
 Depends: ${shlibs:Depends}, ${misc:Depends}
