@@ -15,23 +15,26 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Eclipse Temurin
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
 
       - name: Build with Maven
-        run: ./mvnw clean package
+        run: ./mvnw clean package jpackage:jpackage
 
-      - name: Package it
-        run: ./mvnw jpackage:jpackage
+      - name: Configure Build Environment
+        run: |
+          echo 'set man-db/auto-update false' | sudo debconf-communicate >/dev/null
+          sudo dpkg-reconfigure man-db
+          sudo apt install -y build-essential debhelper devscripts
 
       - name: Build deb
         run: |
-          sudo apt install -y build-essential debhelper devscripts
           mkdir -p target/deb
           cp -r debian target/deb
           cd target/deb
